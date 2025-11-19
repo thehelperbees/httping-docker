@@ -14,7 +14,7 @@ I maintain a copy of the 2.5 version in the `source` directory.
 run a HTTPS ping against google every second until you hit ctrl-c or stop/kill the container
 
 ```bash
-docker run --rm bretfisher/httping https://www.google.com
+docker run --rm gcr.io/the-helper-bees/httping https://www.google.com
 ```
 
 ## Better example
@@ -22,15 +22,15 @@ docker run --rm bretfisher/httping https://www.google.com
 ping ever 100ms, use GET not HEAD, show status codes, use pretty colors
 
 ```bash
-docker run --rm bretfisher/httping -i .1 -G -s -Y https://www.google.com
+docker run --rm gcr.io/the-helper-bees/httping -i .1 -G -s -Y https://www.google.com
 ```
 
-## Use the shell GUI
-
-add a `-it` to run command and a `-K` to httping
-
+## THB: Ping a Django backend on a GCP VM
 ```bash
-docker run -it --rm bretfisher/httping -i .1 -GsYK https://www.google.com
+docker run --network core-infra -it --rm gcr.io/the-helper-bees/httping -i .1 -GsY \
+    --no-host-header \
+    --header "Host: localhost" \
+    dha_sandbox_django:5000/ping
 ```
 
 ## License
